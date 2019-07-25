@@ -8,7 +8,7 @@ export default class SendMessage extends React.Component {
         const { text, time } = this.props
         return (
             <View style={{ alignItems: 'flex-end', justifyContent: 'flex-end', right: 0, paddingRight: 8, paddingTop: 4 }}>
-                <View style={{ backgroundColor: '#e1ffc7', maxWidth: 270, minWidth: 80, borderRadius: 12, overflow: 'hidden' }}>
+                <View style={{ backgroundColor: '#ffcce0', maxWidth: 270, minWidth: 80, borderRadius: 12, overflow: 'hidden' }}>
                     <Text style={{ fontSize: 18, padding: 1, fontWeight: '400', marginTop: 5, marginLeft: 6, marginRight: 6 }}>
                         {text}
                     </Text>

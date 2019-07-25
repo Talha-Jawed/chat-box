@@ -22,7 +22,11 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "com.bubbles.chatBox"
+    },
     "ios": {
+      "bundleIdentifier": "com.bubbles.chatBox",
       "supportsTablet": true
     }
   }

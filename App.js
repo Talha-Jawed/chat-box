@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, KeyboardAvoidingView, ScrollView, TextInput } f
 import { Header } from 'react-native-elements';
 import SendMessage from './src/component/SendMessage';
 import ReceiveMessage from './src/component/ReceiveMessage';
+import InputField from './src/component/Input';
 
 
 export default class App extends React.Component {
@@ -19,12 +20,12 @@ export default class App extends React.Component {
     }
   }
 
-  Send() {
-    const { chatMesg, text } = this.state
+  Send(e) {
+    const { chatMesg } = this.state
     var msg = chatMesg
-    var obj = { sender: true, message: text, time: Date.now() }
+    var obj = { sender: true, message: e, time: Date.now() }
     msg.push(obj)
-    this.setState({ chatMesg: msg, text: '', btn: false })
+    this.setState({ chatMesg: msg })
   }
 
   render() {
@@ -65,7 +66,7 @@ export default class App extends React.Component {
               }
             </View>
           </ScrollView>
-          <View style={{ justifyContent: 'space-evenly', flexDirection: 'row', backgroundColor: '#f2f3f4' }}>
+          {/* <View style={{ justifyContent: 'space-evenly', flexDirection: 'row', backgroundColor: '#f2f3f4' }}>
             <TextInput
               style={styles.input}
               onChangeText={(e) => {
@@ -88,7 +89,10 @@ export default class App extends React.Component {
               <Text style={{ fontSize: 18, fontWeight: 'bold', color: "#3498db", paddingTop: 10, opacity: 0.5 }}>
                 SEND</Text>
             }
-          </View>
+          </View> */}
+          <InputField
+            text={(e) => this.Send(e)}
+          />
         </KeyboardAvoidingView>
       </View>
     );

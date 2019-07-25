@@ -36,12 +36,14 @@ export default class App extends React.Component {
           centerComponent={{ text: 'Chat', style: { color: '#fff' } }}
         />
         <KeyboardAvoidingView style={{ flex: 1 }} behavior='padding' enabled  >
-          <ScrollView style={{ flex: 1 }}>
-            <View style={{ flexDirection: 'column', justifyContent: 'space-between', flex: 1  }}>
+          <ScrollView style={{ flex: 1 }} ref={ref => this.scrollView = ref}
+            onContentSizeChange={(contentWidth, contentHeight) => {
+              this.scrollView.scrollToEnd({ animated: true });
+            }}>
+            <View style={{ flexDirection: 'column', justifyContent: 'space-between', flex: 1 }}>
               {
                 chatMesg &&
                 chatMesg.map((i, index) => {
-                  // console.log(i, "mapmsg")
                   if (i.sender) {
                     return (
                       <SendMessage
@@ -59,7 +61,6 @@ export default class App extends React.Component {
                       />
                     )
                   }
-
                 })
               }
             </View>

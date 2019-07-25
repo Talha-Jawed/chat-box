@@ -32,12 +32,12 @@ export default class Input extends React.Component {
         this.setState({ inputText: '' })
     }
 
-    Add(){
-        this.setState({more: true})
+    Add() {
+        this.setState({ more: true })
     }
 
     close() {
-        this.setState({more: false})
+        this.setState({ more: false })
     }
 
     render() {
@@ -46,8 +46,8 @@ export default class Input extends React.Component {
             <View style={{ justifyContent: 'space-evenly', flexDirection: 'row', backgroundColor: '#f2f3f4', alignItems: 'center' }}>
                 {more
                     ?
-                    <View style={{ width: '75%', height: 30, flexDirection: 'row', justifyContent: 'space-evenly', backgroundColor: '#800080', alignItems: 'center', borderRadius: 18, borderColor: 'gray', borderWidth: 1 }}>
-                        <TouchableOpacity onPress={console.log('emoji')}>
+                    <View style={{ width: '75%', height: 32, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#800080', alignItems: 'center', borderRadius: 18, borderColor: 'gray', borderWidth: 1, marginHorizontal: 10 }}>
+                        <TouchableOpacity style={{ marginLeft: 5 }} onPress={console.log('emoji')}>
                             <Image
                                 style={{ height: 20, width: 20, }}
                                 source={CameraIcon}
@@ -89,7 +89,7 @@ export default class Input extends React.Component {
                                 source={ContactIcon}
                             />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.close()}>
+                        <TouchableOpacity style={{ marginRight: 10 }} onPress={() => this.close()}>
                             <Image
                                 style={{ height: 20, width: 20, }}
                                 source={CloseIcon}

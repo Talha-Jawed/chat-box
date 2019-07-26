@@ -1,7 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Entypo';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import VoiceRecord from '../../assets/MENU-AUDIO.png';
 import MenuIcon from '../../assets/MENU-INFERIOR.png';
 import Emoji from '../../assets/EMOJI.png';
@@ -22,6 +20,7 @@ export default class Input extends React.Component {
         this.state = {
             more: false,
             inputText: '',
+            inputActive: false,
         }
     }
 
@@ -29,7 +28,7 @@ export default class Input extends React.Component {
         const { text } = this.props
         const { inputText } = this.state
         text(inputText)
-        this.setState({ inputText: '' })
+        this.setState({ inputText: '', inputActive: false })
     }
 
     Add() {
@@ -41,12 +40,12 @@ export default class Input extends React.Component {
     }
 
     render() {
-        const { inputText, more } = this.state
+        const { inputText, more, inputActive } = this.state
         return (
-            <View style={{ justifyContent: 'space-evenly', flexDirection: 'row', backgroundColor: '#f2f3f4', alignItems: 'center' }}>
+            <View style={{ justifyContent: 'space-evenly', flexDirection: 'row', backgroundColor: '#f2f3f4', alignItems: 'center', marginVertical: 5 }}>
                 {more
                     ?
-                    <View style={{ width: '75%', height: 32, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#800080', alignItems: 'center', borderRadius: 18, borderColor: 'gray', borderWidth: 1, marginHorizontal: 10 }}>
+                    <View style={{ width: '75%', height: 32, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#800080', alignItems: 'center', borderRadius: 18, marginHorizontal: 10 }}>
                         <TouchableOpacity style={{ marginLeft: 5 }} onPress={console.log('emoji')}>
                             <Image
                                 style={{ height: 20, width: 20, }}
@@ -97,37 +96,44 @@ export default class Input extends React.Component {
                         </TouchableOpacity>
                     </View>
                     :
-                    <View style={{ width: '75%', justifyContent: 'space-evenly', flexDirection: 'row', backgroundColor: 'white', alignItems: 'center', borderRadius: 18, borderColor: 'gray', borderWidth: 1, marginHorizontal: 10 }}>
-                        <TouchableOpacity onPress={console.log('emoji')}>
-                            <Image
-                                style={{ height: 20, width: 20, }}
-                                source={Emoji}
-                            />
-                        </TouchableOpacity>
+                    <View style={{ width: '75%', minHeight: 32, maxHeight: 100, justifyContent: 'space-evenly', flexDirection: 'row', backgroundColor: 'white', alignItems: 'center', borderRadius: 18, borderColor: 'gray', borderWidth: 1, marginHorizontal: 10 }}>
+                        {
+                            !inputActive &&
+                            <TouchableOpacity onPress={console.log('emoji')}>
+                                < Image
+                                    style={{ height: 20, width: 20, }}
+                                    source={Emoji}
+                                />
+                            </TouchableOpacity>
+                        }
                         <TextInput
-                            style={styles.input}
+                            style={[inputActive ? styles.activeInput : styles.input]}
                             onChangeText={(e) => {
                                 this.setState({ inputText: e })
+                                if (e) {
+                                    this.setState({ inputActive: true })
+                                } else {
+                                    this.setState({ inputActive: false })
+                                }
                             }}
                             value={inputText}
                             placeholder={'Type a Message ...'}
                             placeholderTextColor='rgba(255,255,255,0.7)'
-                        // autoFocus
+                            multiline
                         />
-                        <TouchableOpacity onPress={() => this.Add()}>
-                            <Image
-                                style={{ height: 20, width: 20, }}
-                                source={AddIcon}
-                            />
-                        </TouchableOpacity>
+                        {
+                            !inputActive &&
+                            <TouchableOpacity onPress={() => this.Add()}>
+                                <Image
+                                    style={{ height: 20, width: 20, }}
+                                    source={AddIcon}
+                                />
+                            </TouchableOpacity>
+                        }
                     </View>
 
                 }
-                {/* {
-                    !input &&
-                } */}
                 <TouchableOpacity onPress={() => this.Send()}>
-                    {/* <Icon name='menu' size={30} color='#cc0099' /> */}
                     <Image
                         style={{ height: 20, width: 20, }}
                         source={MenuIcon}
@@ -148,14 +154,22 @@ export default class Input extends React.Component {
 const styles = StyleSheet.create({
     input: {
         backgroundColor: 'white',
-        // borderColor: 'gray',
-        // borderWidth: 1,
-        // marginBottom: 10,
         color: 'black',
         height: 30,
         width: '70%',
-        // paddingHorizontal: 10,
         fontSize: 18,
         borderRadius: 18
     },
+    activeInput: {
+        backgroundColor: 'white',
+        color: 'black',
+        minHeight: 30,
+        maxHeight: 100,
+        width: '99.5%',
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+        fontSize: 18,
+        borderRadius: 18,
+        overflow: 'hidden',
+    }
 })

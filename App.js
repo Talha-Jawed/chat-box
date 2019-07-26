@@ -66,30 +66,6 @@ export default class App extends React.Component {
               }
             </View>
           </ScrollView>
-          {/* <View style={{ justifyContent: 'space-evenly', flexDirection: 'row', backgroundColor: '#f2f3f4' }}>
-            <TextInput
-              style={styles.input}
-              onChangeText={(e) => {
-                this.setState({ text: e })
-                if (e) {
-                  this.setState({ btn: true })
-                } else {
-                  this.setState({ btn: false })
-                }
-              }}
-              value={text}
-              placeholder={'Type a Message ...'}
-              placeholderTextColor='rgba(255,255,255,0.7)'
-            // autoFocus
-            />
-            {btn ?
-              <Text onPress={() => this.Send()} style={{ fontSize: 18, fontWeight: 'bold', color: "#3498db", paddingTop: 10 }}>
-                SEND</Text>
-              :
-              <Text style={{ fontSize: 18, fontWeight: 'bold', color: "#3498db", paddingTop: 10, opacity: 0.5 }}>
-                SEND</Text>
-            }
-          </View> */}
           <InputField
             text={(e) => this.Send(e)}
           />
